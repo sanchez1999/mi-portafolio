@@ -5,17 +5,18 @@ import Image from "next/image";
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 
 const navLinks = [
-  { name: "Inicio", active: true, },
-  { name: "Sobre mí", active: false, },
-  { name: "Habilidades", active: false, },
-  { name: "Proyectos", active: false, },
-  { name: "Experiencia", active: false, },
-  { name: "Contacto", active: false, },
+  { name: "Inicio", id: "inicio" },
+  { name: "Sobre mí", id: "sobre-mi" },
+  { name: "Habilidades", id: "habilidades" },
+  { name: "Proyectos", id: "proyectos" },
+  { name: "Experiencia", id: "experiencia" },
+  { name: "Contacto", id: "contacto" },
 ];
 
 export default function Navbar() {
 
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("inicio");
 
   useEffect(() => {
     if (menuOpen) {
@@ -28,6 +29,35 @@ export default function Navbar() {
       document.body.style.overflow = "auto";
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const sections = navLinks.map((link) =>
+      document.getElementById(link.id)
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+      }
+    );
+
+    sections.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => {
+      sections.forEach((section) => {
+        if (section) observer.unobserve(section);
+      });
+    };
+  }, []);
 
   return (
     <>
@@ -43,16 +73,17 @@ export default function Navbar() {
             <div className="flex gap-7">
               {navLinks.map((link) => (
                 <a
-                  href="#" key={link.name}
+                  href={`#${link.id}`}
+                  key={link.name}
                   className={`relative font-['Inter',sans-serif] text-base transition-colors 
-                  ${link.active
+                  ${activeSection === link.id
                       ? "text-[#3B82F6] font-semibold"
                       : "text-[#CBD5E1] hover:text-[#3B82F6]"
                     }
                 `}
                 >
                   {link.name}
-                  {link.active && (
+                  {activeSection === link.id && (
                     <span className="absolute left-0 -bottom-2 h-[2px] w-full bg-[#3B82F6]" />
                   )}
                 </a>
