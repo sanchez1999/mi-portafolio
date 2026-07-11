@@ -5,7 +5,7 @@ import { MdEmail } from "react-icons/md";
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex items-center py-24 pt-32 md:py-20">
+    <section id="inicio" className="min-h-screen flex items-center py-24 pt-32 md:py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-3 grid grid-cols-1 md:grid-cols-2 gap-10">
 
         <div className="flex flex-col justify-center h-full text-center md:text-left">
@@ -15,14 +15,14 @@ export default function Hero() {
             <h1 className="font-['Sora',sans-serif] text-[42px] md:text-[56px] lg:text-[72px] font-bold leading-tight text-[#CBD5E1]">
               Alfredo Sánchez
             </h1>
-
+    
             <h3 className="font-['Sora',sans-serif] text-[24px] md:text-[28px] lg:text-[32px] font-semibold text-[#CBD5E1]">
               Desarrollador Full Stack
             </h3>
 
             <hr className="w-16 md:w-20 border-t-4 border-[#3B82F6] my-3 mx-auto md:mx-0" />
 
-            <p className="mt-6 max-w-xl font-['Inter',sans-serif] text-[16px] md:text-[18px] lg:text-[20px] font-normal text-[#CBD5E1]">
+            <p className="mt-6 max-w-xl font-['Inter',sans-serif] text-[16px] md:text-[18px] lg:text-[20px] font-normal text-[#CBD5E1] text-justify">
               Estudiante de Informática Empresarial en la UCR.
               Apacionado por el desarrollo web, las bases de datos y el análisis de datos. Me gusta crear soluciones eficientes que generen impacto.
             </p>
