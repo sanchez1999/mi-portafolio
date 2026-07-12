@@ -44,7 +44,8 @@ export default function Navbar() {
         });
       },
       {
-        threshold: 0.5,
+        rootMargin: "-80px 0px -50% 0px",
+        threshold: 0,
       }
     );
 
@@ -64,10 +65,10 @@ export default function Navbar() {
       <nav className="fixed top-0 left-0 z-50 w-full h-20 bg-[#1E293B] border-b-3 border-slate-500 py-6">
         <div className="max-w-7xl px-3 h-full mx-auto flex items-center justify-between">
 
-          <div className="flex items-center gap-3">
+          <a href="#inicio" className="flex items-center gap-3">
             <Image src="/images/logo2.svg" alt="Logo" width={50} height={50} />
             <span className="font-['Sora',sans-serif] text-xl font-semibold text-slate-200">A.Sanchez</span>
-          </div>
+          </a>
 
           <div className="hidden lg:flex items-center gap-6">
             <div className="flex gap-7">
@@ -75,7 +76,7 @@ export default function Navbar() {
                 <a
                   href={`#${link.id}`}
                   key={link.name}
-                  className={`relative font-['Inter',sans-serif] text-base transition-colors 
+                  className={`relative font-['Inter',sans-serif] text-base transition-all duration-300 
                   ${activeSection === link.id
                       ? "text-[#3B82F6] font-semibold"
                       : "text-[#CBD5E1] hover:text-[#3B82F6]"
@@ -83,19 +84,21 @@ export default function Navbar() {
                 `}
                 >
                   {link.name}
-                  {activeSection === link.id && (
-                    <span className="absolute left-0 -bottom-2 h-[2px] w-full bg-[#3B82F6]" />
-                  )}
+                  <span
+                    className={`absolute left-0 -bottom-2 h-[2px] bg-[#3B82F6] transition-all duration-300
+                      ${activeSection === link.id ? "w-full opacity-100" : "w-0 opacity-0"}
+                    `}
+                  />
                 </a>
               ))}
             </div>
 
             <a href="/CV_Geovanni Alfredo Sánchez Chaves.pdf" download
-              className="flex items-center justify-center w-[88px] h-[48px] rounded-lg border border-[#3B82F6] font-['Inter',sans-serif] text-[16px] font-semibold text-[#3B82F6] transition-colors hover:bg-[#3B82F6] hover:text-white duration-300 ">
+              className="flex items-center justify-center w-[88px] h-[48px] rounded-lg border border-[#3B82F6] font-['Inter',sans-serif] text-[16px] font-semibold text-[#3B82F6] transition-all duration-300 hover:bg-[#3B82F6] hover:text-white">
               CV
             </a>
           </div>
-          <button
+          <button aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             onClick={() => setMenuOpen(!menuOpen)}
             className="lg:hidden text-[#CBD5E1] text-3xl"
           >
@@ -117,7 +120,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <a
                 key={link.name}
-                href="#"
+                href={`#${link.id}`}
                 onClick={() => setMenuOpen(false)}
                 className="py-3 font-['Inter',sans-serif] text-[#CBD5E1] hover:text-[#3B82F6]"
               >
